@@ -13,7 +13,7 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
 
   const logger = new Logger('Star Wars API');
-  const port = 3000;
+  const port = process.env.PORT || 8080;
 
   await app.listen(port);
   logger.log(`Application listening on port ${port}`);
