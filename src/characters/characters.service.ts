@@ -9,7 +9,7 @@ import { CharacterDTO } from './dto/character.dto';
 
 @Injectable()
 export class CharactersService {
-  async findAll(page = 1): Promise<any> {
+  async findAll(page = 1): Promise<CharacterDTO[]> {
     try {
       const response = await axios.get(
         `https://swapi.dev/api/people/?page=${page}`,

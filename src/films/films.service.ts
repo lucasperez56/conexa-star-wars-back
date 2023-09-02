@@ -5,10 +5,11 @@ import {
 } from '@nestjs/common';
 import axios from 'axios';
 import { FilmMapper } from './mappers/film.mapper';
+import { FilmDTO } from './dto/film.dto';
 
 @Injectable()
 export class FilmsService {
-  async findAll(): Promise<any> {
+  async findAll(): Promise<FilmDTO[]> {
     try {
       const response = await axios.get(`https://swapi.dev/api/films`);
       return response.data.results.map(FilmMapper.mapToFilmDTO);
@@ -17,7 +18,7 @@ export class FilmsService {
     }
   }
 
-  async findOne(id: number): Promise<any> {
+  async findOne(id: number): Promise<FilmDTO> {
     try {
       const response = await axios.get(`https://swapi.dev/api/films/${id}/`);
       return FilmMapper.mapToFilmDTO(response.data);

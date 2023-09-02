@@ -1,7 +1,7 @@
 import { IsString, IsNumber, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class PlanetDTO {
+export class StarshipDTO {
   @ApiProperty()
   @IsNumber()
   readonly id: number;
@@ -12,6 +12,6 @@ export class PlanetDTO {
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsNumber()
-  readonly population?: number;
+  @IsString()
+  readonly starship_class?: string;
 }
