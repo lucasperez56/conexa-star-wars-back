@@ -1,0 +1,27 @@
+import { Controller, Get, Param } from '@nestjs/common';
+import { FilmsService } from './films.service';
+import { ApiOkResponse, ApiQuery } from '@nestjs/swagger';
+import { FilmDTO } from './dto/film.dto';
+
+@Controller('films')
+export class FilmsController {
+  constructor(private readonly filmService: FilmsService) {}
+
+  @Get()
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    type: Number,
+    description: 'Page number',
+  })
+  @ApiOkResponse({ type: [FilmDTO] })
+  findAll(): Promise<FilmDTO[]> {
+    return this.filmService.findAll();
+  }
+
+  @Get(':id')
+  @ApiOkResponse({ type: FilmDTO })
+  findOne(@Param('id') id: number): Promise<FilmDTO> {
+    return this.filmService.findOne(id);
+  }
+}
