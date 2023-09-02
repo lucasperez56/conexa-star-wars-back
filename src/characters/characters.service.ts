@@ -4,6 +4,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import axios from 'axios';
+import { CharacterMapper } from './mappers/character.mapper';
+import { CharacterDTO } from './dto/character.dto';
 
 @Injectable()
 export class CharactersService {
@@ -12,16 +14,16 @@ export class CharactersService {
       const response = await axios.get(
         `https://swapi.dev/api/people/?page=${page}`,
       );
-      return response.data.results;
+      return response.data.results.map(CharacterMapper.mapToCharacterDTO);
     } catch (error) {
       throw new InternalServerErrorException('Error fetching all characters');
     }
   }
 
-  async findOne(id: number): Promise<any> {
+  async findOne(id: number): Promise<CharacterDTO> {
     try {
       const response = await axios.get(`https://swapi.dev/api/people/${id}/`);
-      return response.data;
+      return CharacterMapper.mapToCharacterDTO(response.data);
     } catch (error) {
       if (error.response && error.response.status === 404) {
         throw new NotFoundException(`Character with ID ${id} not found`);
