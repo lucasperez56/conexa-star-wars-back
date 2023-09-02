@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class StarshipDTO {
@@ -10,8 +10,19 @@ export class StarshipDTO {
   @IsString()
   readonly name: string;
 
-  @ApiProperty({ required: false })
-  @IsOptional()
+  @ApiProperty()
   @IsString()
-  readonly starship_class?: string;
+  readonly model: string;
+
+  @ApiProperty()
+  @IsString()
+  readonly starship_class: string;
+
+  @ApiProperty()
+  @IsString()
+  readonly manufacturer: string;
+
+  @ApiProperty()
+  @IsString()
+  readonly cost_in_credits: string;
 }

@@ -9,9 +9,13 @@ import { FilmDTO } from './dto/film.dto';
 
 @Injectable()
 export class FilmsService {
-  async findAll(): Promise<FilmDTO[]> {
+  async findAll(search?: string): Promise<FilmDTO[]> {
+    let url = 'https://swapi.dev/api/films/';
+    if (search) {
+      url += `?search=${search}`;
+    }
     try {
-      const response = await axios.get(`https://swapi.dev/api/films`);
+      const response = await axios.get(url);
       return response.data.results.map(FilmMapper.mapToFilmDTO);
     } catch (error) {
       throw new InternalServerErrorException('Error fetching all films');

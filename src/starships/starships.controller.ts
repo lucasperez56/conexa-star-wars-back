@@ -3,7 +3,7 @@ import { StarshipsService } from './starships.service';
 import { ApiOkResponse, ApiQuery } from '@nestjs/swagger';
 import { StarshipDTO } from './dto/starship.dto';
 
-@Controller('ships')
+@Controller('starships')
 export class StarshipsController {
   constructor(private readonly starshipsService: StarshipsService) {}
 
@@ -15,8 +15,11 @@ export class StarshipsController {
     description: 'Page number',
   })
   @ApiOkResponse({ type: [StarshipDTO] })
-  findAll(@Query('page') page?: number): Promise<StarshipDTO[]> {
-    return this.starshipsService.findAll(page);
+  findAll(
+    @Query('search') search: string,
+    @Query('page') page?: number,
+  ): Promise<StarshipDTO[]> {
+    return this.starshipsService.findAll(page, search);
   }
 
   @Get(':id')

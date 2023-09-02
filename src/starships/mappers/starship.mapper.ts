@@ -6,7 +6,10 @@ export class StarshipMapper {
     return {
       id: extractIdFromUrl(data.url),
       name: data.name,
+      model: data.model,
+      manufacturer: data.manufacturer,
       starship_class: data.starship_class,
+      cost_in_credits: data.cost_in_credits,
     };
   }
 }

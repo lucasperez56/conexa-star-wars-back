@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PlanetDTO {
@@ -10,8 +10,11 @@ export class PlanetDTO {
   @IsString()
   readonly name: string;
 
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsNumber()
+  @ApiProperty()
+  @IsString()
   readonly population?: number;
+
+  @ApiProperty()
+  @IsString()
+  readonly terrain?: number;
 }

@@ -9,11 +9,15 @@ import { CharacterDTO } from './dto/character.dto';
 
 @Injectable()
 export class CharactersService {
-  async findAll(page = 1): Promise<CharacterDTO[]> {
+  async findAll(page = 1, search?: string): Promise<CharacterDTO[]> {
+    let url = 'https://swapi.dev/api/people/';
+    if (search) {
+      url += `?search=${search}`;
+    } else if (page) {
+      url += `?page=${page}`;
+    }
     try {
-      const response = await axios.get(
-        `https://swapi.dev/api/people/?page=${page}`,
-      );
+      const response = await axios.get(url);
       return response.data.results.map(CharacterMapper.mapToCharacterDTO);
     } catch (error) {
       throw new InternalServerErrorException('Error fetching all characters');

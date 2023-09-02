@@ -9,11 +9,15 @@ import { PlanetDTO } from './dto/planet.dto';
 
 @Injectable()
 export class PlanetsService {
-  async findAll(page = 1): Promise<PlanetDTO[]> {
+  async findAll(page = 1, search?: string): Promise<PlanetDTO[]> {
+    let url = 'https://swapi.dev/api/planets/';
+    if (search) {
+      url += `?search=${search}`;
+    } else if (page) {
+      url += `?page=${page}`;
+    }
     try {
-      const response = await axios.get(
-        `https://swapi.dev/api/planets/?page=${page}`,
-      );
+      const response = await axios.get(url);
       return response.data.results.map(PlanetMapper.mapToPlanetDTO);
     } catch (error) {
       throw new InternalServerErrorException('Error fetching all planets');

@@ -15,8 +15,11 @@ export class PlanetsController {
     description: 'Page number',
   })
   @ApiOkResponse({ type: [PlanetDTO] })
-  findAll(@Query('page') page?: number): Promise<PlanetDTO[]> {
-    return this.planetsService.findAll(page);
+  findAll(
+    @Query('search') search: string,
+    @Query('page') page?: number,
+  ): Promise<PlanetDTO[]> {
+    return this.planetsService.findAll(page, search);
   }
 
   @Get(':id')

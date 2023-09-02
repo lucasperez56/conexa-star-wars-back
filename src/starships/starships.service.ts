@@ -9,11 +9,15 @@ import { StarshipDTO } from './dto/starship.dto';
 
 @Injectable()
 export class StarshipsService {
-  async findAll(page = 1): Promise<StarshipDTO[]> {
+  async findAll(page = 1, search?: string): Promise<StarshipDTO[]> {
+    let url = 'https://swapi.dev/api/starships/';
+    if (search) {
+      url += `?search=${search}`;
+    } else if (page) {
+      url += `?page=${page}`;
+    }
     try {
-      const response = await axios.get(
-        `https://swapi.dev/api/starships/?page=${page}`,
-      );
+      const response = await axios.get(url);
       return response.data.results.map(StarshipMapper.mapToStarshipDTO);
     } catch (error) {
       throw new InternalServerErrorException('Error fetching all starships');

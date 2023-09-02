@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { FilmsService } from './films.service';
 import { ApiOkResponse, ApiQuery } from '@nestjs/swagger';
 import { FilmDTO } from './dto/film.dto';
@@ -15,8 +15,8 @@ export class FilmsController {
     description: 'Page number',
   })
   @ApiOkResponse({ type: [FilmDTO] })
-  findAll(): Promise<FilmDTO[]> {
-    return this.filmService.findAll();
+  findAll(@Query('search') search: string): Promise<FilmDTO[]> {
+    return this.filmService.findAll(search);
   }
 
   @Get(':id')

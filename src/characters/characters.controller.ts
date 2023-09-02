@@ -15,8 +15,11 @@ export class CharactersController {
     description: 'Page number',
   })
   @ApiOkResponse({ type: [CharacterDTO] })
-  findAll(@Query('page') page?: number): Promise<CharacterDTO[]> {
-    return this.charactersService.findAll(page);
+  findAll(
+    @Query('search') search: string,
+    @Query('page') page?: number,
+  ): Promise<CharacterDTO[]> {
+    return this.charactersService.findAll(page, search);
   }
 
   @Get(':id')

@@ -7,6 +7,12 @@ export class CharacterMapper {
       id: extractIdFromUrl(data.url),
       name: data.name,
       birth_year: data.birth_year,
+      eye_color: data.eye_color,
+      gender: data.gender,
+      hair_color: data.hair_color,
+      height: data.height,
+      mass: data.mass,
+      skin_color: data.skin_color,
     };
   }
 }

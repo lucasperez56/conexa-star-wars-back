@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class FilmDTO {
@@ -10,8 +10,15 @@ export class FilmDTO {
   @IsString()
   readonly title: string;
 
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsNumber()
-  readonly episode_id?: number;
+  @ApiProperty()
+  @IsString()
+  readonly episode_id: string;
+
+  @ApiProperty()
+  @IsString()
+  readonly director: string;
+
+  @ApiProperty()
+  @IsString()
+  readonly producer: string;
 }

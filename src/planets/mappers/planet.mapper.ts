@@ -7,6 +7,7 @@ export class PlanetMapper {
       id: extractIdFromUrl(data.url),
       name: data.name,
       population: data.population,
+      terrain: data.terrain,
     };
   }
 }
