@@ -5,7 +5,7 @@ export class FilmMapper {
   static mapToFilmDTO(data: any): FilmDTO {
     return {
       id: extractIdFromUrl(data.url),
-      title: data.title,
+      name: data.title,
       episode_id: data.episode_id,
       director: data.director,
       producer: data.producer,

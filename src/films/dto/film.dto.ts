@@ -8,7 +8,7 @@ export class FilmDTO {
 
   @ApiProperty()
   @IsString()
-  readonly title: string;
+  readonly name: string;
 
   @ApiProperty()
   @IsString()
